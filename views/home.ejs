@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>URL Shortener</h1>
+
+            <% if(locals.id) {%>
+                <p>URL Generated: http://localhost:4000/url/<%=id%>
+                </p>
+                <%}%>
+                    <div>
+                        <form method="post" action="/url">
+                            <label>Enter Your Original Url</label>
+                            <input type="text" name="redirectUrl" placeholder="https://example.com">
+                            <button type="submit">Generate</button>
+                        </form>
+                    </div>
+
+                    <br>
+                    <div>
+                        <h3>All Records Fetched From DataBase</h3>
+                        <% if (locals.data) { %>
+                            <table border="2px solid">
+                                <thead>
+                                    <th>S.No</th>
+                                    <th>ShortId</th>
+                                    <th>Redirect Url</th>
+                                    <th>Clicks</th>
+                                </thead>
+                                <tbody>
+                                    <% data.forEach((d,index)=> { %>
+                                        <tr>
+                                            <td>
+                                                <%= index +1%>
+                                            </td>
+                                            <td>
+                                                <%= d.shortId%>
+                                            </td>
+                                            <td>
+                                                <%= d.redirectUrl%>
+                                            </td>
+                                            <td>
+                                                <%= d.visitHistory.length%>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                            </table>
+                            <% } %>
+                    </div>
+</body>
+
+</html>
